@@ -1,0 +1,22 @@
+@import "variables";
+@import "mixins";
+
+html,
+body {
+  height: 100%;
+}
+
+body {
+  margin: 0;
+  font-family: Roboto, "Helvetica Neue", sans-serif;
+}
+
+router-outlet ~ * {
+  position: absolute;
+  height: 100%;
+  width: 100%;
+}
+
+.fill {
+  flex: 1 1 auto;
+}
