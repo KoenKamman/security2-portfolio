@@ -1,7 +1,7 @@
 @import "../../node_modules/@angular/material/theming";
 @include mat-core();
 
-$night-app-primary: mat-palette($mat-grey, 900);
+$night-app-primary: mat-palette($mat-green, 800);
 $night-app-accent: mat-palette($mat-orange, A200, A100, A400);
 $night-app-warn: mat-palette($mat-red);
 
