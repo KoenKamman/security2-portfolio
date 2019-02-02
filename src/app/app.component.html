@@ -1,7 +1,50 @@
 <mat-toolbar color="primary">
-  <span>Security 2 - Portfolio</span> <span class="fill"></span>
-  <span>Mark de Jong & Koen Kamman</span>
+  <span>Security 2 - Portfolio</span>
+  <span class="fill"></span>
   <a mat-icon-button href="https://github.com/KoenKamman/security2-portfolio">
     <mat-icon svgIcon="github"></mat-icon>
   </a>
+</mat-toolbar>
+
+<mat-sidenav-container class="fill">
+  <mat-sidenav mode="side" [opened]="sidenavOpen">
+    <mat-nav-list>
+      <a mat-list-item (click)="scroll(assignment1)">
+        Opdracht 1
+      </a>
+    </mat-nav-list>
+  </mat-sidenav>
+  <mat-sidenav-content>
+    <div class="content">
+      <div #assignment1>
+        <app-assignment-card
+          title="Opdracht 1"
+          subtitle="WhatsApp Deployment Diagram & DFDs"
+        >
+          <p>
+            Voor Opdracht 1 is nagegaan hoe WhatsApp beveiliging toepast. In
+            onderstaande diagrammen is dit in grote lijnen terug te zien.
+          </p>
+          <div class="flexbox">
+            <div class="img-container">
+              <img src="../assets/diagrams/Deployment_Diagram_(WhatsApp).png" />
+            </div>
+            <p class="mat-small caption">Deployment Diagram</p>
+            <div class="img-container">
+              <img src="../assets/diagrams/DFD_Context_(WhatsApp).png" />
+            </div>
+            <p class="mat-small caption">DFD Context</p>
+            <div class="img-container">
+              <img src="../assets/diagrams/DFD_Level0_(WhatsApp).png" />
+            </div>
+            <p class="mat-small caption">DFD Level 0</p>
+          </div>
+        </app-assignment-card>
+      </div>
+    </div>
+  </mat-sidenav-content>
+</mat-sidenav-container>
+
+<mat-toolbar class="footer">
+  <p class="mat-small">Mark de Jong & Koen Kamman</p>
 </mat-toolbar>

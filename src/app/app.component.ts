@@ -1,4 +1,4 @@
-import { Component } from "@angular/core";
+import { Component, ChangeDetectorRef, OnInit } from "@angular/core";
 import { MatIconRegistry } from "@angular/material";
 import { DomSanitizer } from "@angular/platform-browser";
 
@@ -7,12 +7,14 @@ import { DomSanitizer } from "@angular/platform-browser";
   templateUrl: "./app.component.html",
   styleUrls: ["./app.component.scss"]
 })
-export class AppComponent {
+export class AppComponent implements OnInit {
   title = "security2-portfolio";
+  sidenavOpen = true;
 
   constructor(
     private matIconRegistry: MatIconRegistry,
-    private domSanitizer: DomSanitizer
+    private domSanitizer: DomSanitizer,
+    private changeDetectorRef: ChangeDetectorRef
   ) {
     this.matIconRegistry.addSvgIcon(
       "github",
@@ -20,5 +22,21 @@ export class AppComponent {
         "../assets/icons/github.svg"
       )
     );
+  }
+
+  public ngOnInit(): void {
+    let resize = () => {
+      if (window.innerWidth > 768) {
+        this.sidenavOpen = true;
+      } else {
+        this.sidenavOpen = false;
+      }
+    };
+    window.onresize = resize;
+    resize();
+  }
+
+  public scroll(element: Element): void {
+    element.scrollIntoView({ behavior: "smooth", block: "start" });
   }
 }
