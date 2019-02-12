@@ -59,4 +59,4 @@ app.post("/message", (req, res) => {
   res.send();
 });
 
-app.listen(port, () => console.log(`App listening on port ${port}!`));
+app.listen(port, () => console.log(`Server listening on port ${port}!`));
