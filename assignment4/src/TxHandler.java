@@ -1,11 +1,16 @@
+import java.lang.reflect.Array;
+import java.util.ArrayList;
+import java.util.Iterator;
+
 public class TxHandler {
+	private UTXOPool utxoPool;
 
 	/* Creates a public ledger whose current UTXOPool (collection of unspent 
 	 * transaction outputs) is utxoPool. This should make a defensive copy of 
 	 * utxoPool by using the UTXOPool(UTXOPool uPool) constructor.
 	 */
 	public TxHandler(UTXOPool utxoPool) {
-		// IMPLEMENT THIS
+		this.utxoPool = utxoPool;
 	}
 
 	/* Returns true if 
@@ -19,7 +24,14 @@ public class TxHandler {
 	 */
 
 	public boolean isValidTx(Transaction tx) {
-		// IMPLEMENT THIS
+		UTXOPool newPool = new UTXOPool();
+
+		for (int i = 0; i < tx.numInputs(); i++) {
+			Transaction.Input input = tx.getInput(i);
+			UTXO utxo = new UTXO(input.prevTxHash, input.outputIndex);
+			if (!utxoPool.contains(utxo)) return false;
+		}
+
 		return false;
 	}
 
@@ -32,5 +44,4 @@ public class TxHandler {
 		// IMPLEMENT THIS
 		return null;
 	}
-
 } 
