@@ -1,9 +1,11 @@
 import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.Iterator;
+import java.util.List;
 
 public class TxHandler {
 	private UTXOPool utxoPool;
+//	private Transaction [] transactions;
 
 	/* Creates a public ledger whose current UTXOPool (collection of unspent 
 	 * transaction outputs) is utxoPool. This should make a defensive copy of 
@@ -25,14 +27,32 @@ public class TxHandler {
 
 	public boolean isValidTx(Transaction tx) {
 		UTXOPool newPool = new UTXOPool();
+		double inputTotal = 0;
+		double outputTotal = 0;
 
 		for (int i = 0; i < tx.numInputs(); i++) {
 			Transaction.Input input = tx.getInput(i);
 			UTXO utxo = new UTXO(input.prevTxHash, input.outputIndex);
+			// Check 1
 			if (!utxoPool.contains(utxo)) return false;
+			// Check 2
+			Transaction.Output output = utxoPool.getTxOutput(utxo);
+			byte[] rawMessage = tx.getRawDataToSign(i);
+			if (!output.address.verifySignature(rawMessage ,input.signature)) return false;
+			// Check 3
+			if (newPool.contains(utxo)) return false;
+			newPool.addUTXO(utxo, output);
+			// Check 4
+			if (output.value < 0) return false;
+			// Check 5
+			inputTotal += output.value;
 		}
 
-		return false;
+		for (Transaction.Output o : tx.getOutputs()) {
+			outputTotal += o.value;
+		}
+
+		return (inputTotal >= outputTotal);
 	}
 
 	/* Handles each epoch by receiving an unordered array of proposed 
@@ -41,7 +61,24 @@ public class TxHandler {
 	 * and updating the current UTXO pool as appropriate.
 	 */
 	public Transaction[] handleTxs(Transaction[] possibleTxs) {
-		// IMPLEMENT THIS
-		return null;
+		ArrayList<Transaction> validTransactions = new ArrayList<>();
+
+		for (Transaction tx: possibleTxs) {
+			if (!this.isValidTx(tx)) continue;
+			validTransactions.add(tx);
+
+			for (Transaction.Input input : tx.getInputs()) {
+				UTXO utxo = new UTXO(input.prevTxHash, input.outputIndex);
+				utxoPool.removeUTXO(utxo);
+			}
+
+			for (int i = 0; i < tx.numOutputs(); i++) {
+				UTXO utxo = new UTXO(tx.getHash(), i);
+				utxoPool.addUTXO(utxo, tx.getOutput(i));
+			}
+		}
+
+		Transaction[] txArray = new Transaction[validTransactions.size()];
+		return validTransactions.toArray(txArray);
 	}
-} 
+}
