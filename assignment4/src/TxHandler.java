@@ -5,7 +5,6 @@ import java.util.List;
 
 public class TxHandler {
 	private UTXOPool utxoPool;
-//	private Transaction [] transactions;
 
 	/* Creates a public ledger whose current UTXOPool (collection of unspent 
 	 * transaction outputs) is utxoPool. This should make a defensive copy of 
@@ -42,13 +41,13 @@ public class TxHandler {
 			// Check 3
 			if (newPool.contains(utxo)) return false;
 			newPool.addUTXO(utxo, output);
-			// Check 4
-			if (output.value < 0) return false;
 			// Check 5
 			inputTotal += output.value;
 		}
 
+		// Check 4
 		for (Transaction.Output o : tx.getOutputs()) {
+			if (o.value < 0) return false;
 			outputTotal += o.value;
 		}
 
