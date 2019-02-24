@@ -98,7 +98,7 @@ export class AppComponent implements OnInit {
     this.matIconRegistry.addSvgIcon(
       "github",
       this.domSanitizer.bypassSecurityTrustResourceUrl(
-        "../assets/icons/github.svg"
+        "assets/icons/github.svg"
       )
     );
   }
