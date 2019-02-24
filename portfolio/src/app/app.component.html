@@ -349,7 +349,76 @@ listItem.innerHTML = "[" + message.user + "] : " + message.message;</pre
       </div>
 
       <div #assignment4 class="wrapper">
-        <app-assignment-card title="Opdracht 4" subtitle="">
+        <app-assignment-card title="Opdracht 4" subtitle="ScroogeCoin">
+          <h3>Opdracht 1</h3>
+          <div class="flexbox">
+            <div class="img-container">
+              <img src="../assets/diagrams/ScroogeCoin_UML_Diagram.png" />
+            </div>
+          </div>
+          <p>
+            De afkorting UTXO staat voor: Unspent Transaction Output. Het is de
+            output van een transacties die nog niet gebruikt is, in principe dus
+            de inhoud van je portemonnee. Wanneer je bijvoorbeeld een briefje
+            van 50, 20 en 5 in je portemonnee hebt zitten, kan dit vertaald
+            worden naar drie UTXO’s. Eén met de waarde 50, één met de waarde 20,
+            en de laatste met de waarde 5 (Daniel, 2018).
+          </p>
+          <h3>Opdracht 2</h3>
+          <div class="flexbox">
+            <div class="img-container">
+              <img src="../assets/diagrams/ScroogeCoin.png" />
+            </div>
+          </div>
+          <p>
+            De signature is de digest van het originele bericht, wat vervolgens
+            geencrypt is met de private key van de sender.
+          </p>
+          <p>
+            De signature wordt verkregen door het uitvoeren van de volgende
+            stappen:
+          </p>
+          <ol>
+            <li>De message (Transaction.Input) wordt gehasht.</li>
+            <li>
+              Deze digest wordt geëncrypt met de private key van de sender.
+            </li>
+          </ol>
+          <p>
+            Om integriteit en authenticiteit te waarborgen, kan de signature via
+            de volgende stappen geverifieerd worden:
+          </p>
+          <ol>
+            <li>
+              De signature kan gedecrypt worden met de public key van de sender.
+              Zo wordt authenticity gewaarborgd. We zijn er zeker van dat de
+              private key de signature heeft gemaakt. Het resultaat van de
+              decryptie is een digest van het originele bericht.
+            </li>
+            <li>
+              Vervolgens kan de ontvanger, het ontvangen bericht opnieuw hashen.
+              Het resultaat kan vergeleken worden met de digest die na decryptie
+              verkregen is. Indien ze gelijk zijn, is het bericht na het
+              ondertekenen niet meer aangepast. Zo is integriteit gewaarborgd.
+            </li>
+          </ol>
+          <p>
+            Het RSA-encryptiealgoritme is gebruikt voor de private/public keys.
+            Verder is SHA-256 gebruikt voor hashing.
+          </p>
+          <p>SHA-256 wordt ook gebruikt voor het hashen van de transactie.</p>
+          <p>
+            De input voor de transactie hash is de lijst met inputs, gevolgd met
+            de lijst van outputs, in de vorm van een byte array. Voor de public
+            keys van outputs worden de resultaten van de methodes getExponent()
+            en getModulus() meegenomen als input.
+          </p>
+          <h3>Opdracht 3</h3>
+          <div class="flexbox">
+            <div class="img-container">
+              <img src="../assets/diagrams/Alice_Bob_Scrooge.png" />
+            </div>
+          </div>
         </app-assignment-card>
       </div>
     </div>
