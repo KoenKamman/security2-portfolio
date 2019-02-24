@@ -52,7 +52,10 @@
       </div>
 
       <div #assignment2>
-        <app-assignment-card title="Opdracht 2" subtitle="Opdracht 2">
+        <app-assignment-card
+          title="Opdracht 2"
+          subtitle="WhatsApp Threats & Mitigations"
+        >
           <table
             mat-table
             [dataSource]="assignment2TableDataSource"
@@ -87,9 +90,68 @@
               </td>
             </ng-container>
 
-            <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-            <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+            <tr
+              mat-header-row
+              *matHeaderRowDef="assignment2DisplayedColumns"
+            ></tr>
+            <tr
+              mat-row
+              *matRowDef="let row; columns: assignment2DisplayedColumns"
+            ></tr>
           </table>
+        </app-assignment-card>
+      </div>
+
+      <div #assignment3>
+        <app-assignment-card title="Opdracht 3" subtitle="">
+          <table
+            mat-table
+            [dataSource]="assignment3TableDataSource"
+            class="mat-elevation-z8"
+          >
+            <ng-container matColumnDef="threat">
+              <th mat-header-cell *matHeaderCellDef>Threat</th>
+              <td mat-cell *matCellDef="let element">{{ element.threat }}</td>
+            </ng-container>
+
+            <ng-container matColumnDef="title">
+              <th mat-header-cell *matHeaderCellDef>Title</th>
+              <td mat-cell *matCellDef="let element">{{ element.title }}</td>
+            </ng-container>
+
+            <ng-container matColumnDef="description">
+              <th mat-header-cell *matHeaderCellDef>Description</th>
+              <td mat-cell *matCellDef="let element">
+                {{ element.description }}
+              </td>
+            </ng-container>
+
+            <ng-container matColumnDef="location">
+              <th mat-header-cell *matHeaderCellDef>Location</th>
+              <td mat-cell *matCellDef="let element">{{ element.location }}</td>
+            </ng-container>
+
+            <ng-container matColumnDef="mitigation">
+              <th mat-header-cell *matHeaderCellDef>Mitigation</th>
+              <td mat-cell *matCellDef="let element">
+                {{ element.mitigation }}
+              </td>
+            </ng-container>
+
+            <tr
+              mat-header-row
+              *matHeaderRowDef="assignment3DisplayedColumns"
+            ></tr>
+            <tr
+              mat-row
+              *matRowDef="let row; columns: assignment3DisplayedColumns"
+            ></tr>
+          </table>
+        </app-assignment-card>
+      </div>
+
+      <div #assignment4>
+        <app-assignment-card title="Opdracht 4" subtitle="">
         </app-assignment-card>
       </div>
     </div>

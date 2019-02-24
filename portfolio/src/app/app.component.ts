@@ -11,7 +11,7 @@ export class AppComponent implements OnInit {
   title = "security2-portfolio";
   sidenavOpen = true;
 
-  displayedColumns: string[] = [
+  assignment2DisplayedColumns: string[] = [
     "threat",
     "title",
     "description",
@@ -71,6 +71,22 @@ export class AppComponent implements OnInit {
       location: "Message Processing --> Client (Webbrowser)",
       mitigation:
         "Access Control Lists om alleen geverifieerde apparaten bepaalde acties te laten uitvoeren."
+    }
+  ];
+
+  assignment3DisplayedColumns: string[] = ["threat", "location", "description"];
+  assignment3TableDataSource = [
+    {
+      threat: "Cross Site Scripting",
+      location: "Browser Client ← → Web Server",
+      description:
+        "De webserver zuivert de input van data niet, waardoor schadelijke input (code) toegelaten wordt door de webserver."
+    },
+    {
+      threat: "Persistent Cross Site Scripting",
+      location: "Web Server ← → Memory",
+      description:
+        "Aangezien de webserver de input die persistent wordt opgeslagen niet zuivert, kan schadelijke code persistent opgeslagen worden. Deze kan vervolgens teruggestuurd worden naar meerdere gebruikers."
     }
   ];
 
