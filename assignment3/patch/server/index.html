@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>index.html</title>
+  </head>
+
+  <body>
+    <div class="controls">
+      <div class="container">
+        <input type="text" id="nameInput" />
+        <input type="password" id="passwordInput" />
+        <button type="button" onclick="signIn()">Sign In</button>
+      </div>
+      <div class="container">
+        <textarea rows="10" cols="30" id="messageInput"></textarea>
+        <button type="button" onclick="postMessage()">Post Message</button>
+      </div>
+    </div>
+    <ul id="messageList"></ul>
+  </body>
+
+  <style>
+    body {
+      display: flex;
+      flex-direction: row;
+      outline: 1px solid;
+    }
+    div {
+      margin: 10px;
+    }
+    .container {
+      width: 300px;
+      display: flex;
+      flex-direction: column;
+    }
+    input,
+    textarea,
+    button {
+      margin: 3px;
+    }
+    #messageList {
+      flex: 1;
+      height: 280px;
+      overflow: scroll;
+    }
+  </style>
+
+  <script>
+    let token;
+
+    let signIn = () => {
+      let name = document.getElementById("nameInput").value;
+      let password = document.getElementById("passwordInput").value;
+      const Http = new XMLHttpRequest();
+      const url = "http://localhost:3000/auth";
+      Http.open("POST", url);
+      Http.setRequestHeader(
+        "Content-type",
+        "application/x-www-form-urlencoded"
+      );
+      Http.send("name=" + name + "&password=" + password);
+      Http.onreadystatechange = function() {
+        if (this.readyState == 4 && this.status == 200) {
+          token = JSON.parse(Http.response).token;
+        }
+      };
+    };
+    let postMessage = () => {
+      let messageText = document.getElementById("messageInput").value;
+      const Http = new XMLHttpRequest();
+      const url = "http://localhost:3000/message";
+      Http.open("POST", url);
+      Http.setRequestHeader(
+        "Content-type",
+        "application/x-www-form-urlencoded"
+      );
+      Http.send("message=" + messageText + "&token=" + token);
+      Http.onreadystatechange = function() {
+        if (this.readyState == 4 && this.status == 200) {
+          clearTextArea();
+          clearMessageList();
+          getMessages();
+        }
+      };
+    };
+    let clearTextArea = () => {
+      document.getElementById("messageInput").value = "";
+    };
+    let clearMessageList = () => {
+      let messageList = document.getElementById("messageList");
+      messageList.innerText = "";
+    };
+    let addMessageToList = message => {
+      let messageList = document.getElementById("messageList");
+      let listItem = document.createElement("li");
+      listItem.innerText = "[" + message.user + "] : " + message.message;
+      messageList.appendChild(listItem);
+    };
+    let getMessages = () => {
+      const Http = new XMLHttpRequest();
+      const url = "http://localhost:3000/messages";
+      Http.open("GET", url);
+      Http.send();
+      Http.onreadystatechange = function() {
+        if (this.readyState == 4 && this.status == 200) {
+          const messages = JSON.parse(Http.response);
+          messages.forEach(message => {
+            addMessageToList(message);
+          });
+        }
+      };
+    };
+    getMessages();
+  </script>
+</html>
